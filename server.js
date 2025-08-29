@@ -77,7 +77,6 @@ app.post("/bruxos", (req, res) => {
         sucess: true,
         message: "Novo bruo adicionado a Hogwarts!",
         data: novoBruxo
-
     });
 });
 
