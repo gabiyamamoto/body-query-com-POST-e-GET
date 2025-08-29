@@ -1,0 +1,19 @@
+{
+  "name": "bodyquery",
+  "version": "1.0.0",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node server.js"
+  },
+  "keywords": ["Senai", "BodyQuery", "API"],
+  "author": "Gabi Emi",
+  "license": "MIT",
+  "description": "Projeto exemplo para filtros e verbos HTTP - GET e POST",
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
+  }
+}
