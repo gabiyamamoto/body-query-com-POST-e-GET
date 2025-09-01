@@ -174,6 +174,39 @@ app.get('/animais', (req, res) => {
     });
 });
 
+app.get("/stats", (req, res) => {
+    const contagem = {};
+    const soma = {};
+
+    for (let i = 0; i < bruxos.length; i++) {
+        const bruxo = bruxos[i];
+        const casa = bruxo.casa;
+
+        if (contagem[casa]) {
+            contagem[casa]++;
+        } else {
+            contagem[casa] = 1;
+        }
+    }
+
+    for (let i = 0; i < varinhas.length; i++) {
+        const varinha = varinhas[i];
+        const material = varinha.material;
+
+        if (soma[material]) {
+            soma[material]++;
+        } else {
+            soma[material] = 1;
+        }
+    }
+
+    let materialMaisComum = 
+
+    res.status(200).json(contagem);
+});
+
+
+
 // Iniciar servidor escutando na porta definida
 app.listen(serverPort, () => {
     console.log(`🚀 Servidor rodando em http://localhost:${serverPort} 🚀`);
