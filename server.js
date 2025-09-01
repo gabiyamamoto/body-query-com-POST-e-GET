@@ -51,7 +51,7 @@ app.post("/bruxos", (req, res) => {
 
     console.log('Dados recebidos: req.body');
 
-    if (!nome || !casa || !ano || !vivo) {
+    if (!nome || !casa || !ano ) {
         return res.status(400).json({
             suscess: false,
             message: "Nome, casa, ano e estar vivo são obrigatórios para um bruxo!"
@@ -96,6 +96,43 @@ app.get('/varinhas', (req, res) => {
     res.status(200).json({
         total: resultado.length,
         data: resultado
+    });
+});
+
+//Body - Varinhas
+app.post("/varinhas", (req, res) => {
+    const { material, nucleo, comprimento } = req.body;
+
+    console.log('Dados recebidos: req.body');
+
+    if (!material || !nucleo || !comprimento ) {
+        return res.status(400).json({
+            suscess: false,
+            message: "Material, nucleo e comprimento são obrigatórios para uma varinha!"
+        });
+    }
+
+    if (comprimento <= 0) {
+        return res.status(400).json({
+            suscess: false,
+            message: "O comprimento da varinha é inválido!"
+        });
+    }
+
+    //Criar uma nova varinha
+    const novaVarinha = {
+        id: varinhas.length + 1,
+        material: material,
+        nucleo: nucleo,
+        comprimento: comprimento
+    }
+
+    varinhas.push(novaVarinha);
+
+    res.status(201).json({
+        sucess: true,
+        message: "Nova varinha adicionada a Hogwarts!",
+        data: novaVarinha
     });
 });
 
