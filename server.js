@@ -3,7 +3,7 @@ import express from "express";
 import dotenv from "dotenv";
 
 import dados from "./src/data/dados.js";
-const { bruxos } = dados;
+const { bruxos, varinhas, pocoes, animais } = dados;
 
 // Criar aplicação com Express e configurar para aceitar JSON
 const app = express();
@@ -75,8 +75,65 @@ app.post("/bruxos", (req, res) => {
 
     res.status(201).json({
         sucess: true,
-        message: "Novo bruo adicionado a Hogwarts!",
+        message: "Novo bruxo adicionado a Hogwarts!",
         data: novoBruxo
+    });
+});
+
+//Query parameters - Varinhas
+app.get('/varinhas', (req, res) => {
+    const { material, nucleo } = req.query;
+    let resultado = varinhas;
+
+    if (material) {
+        resultado = resultado.filter(v => v.material.toLowerCase().includes(material.toLocaleLowerCase()));
+    }
+
+    if (nucleo) {
+        resultado = resultado.filter(v => v.nucleo.toLowerCase().includes(nucleo.toLocaleLowerCase()));
+    }
+
+    res.status(200).json({
+        total: resultado.length,
+        data: resultado
+    });
+});
+
+//Query parameters - Poções
+app.get('/pocoes', (req, res) => {
+    const { nome, efeito } = req.query;
+    let resultado = pocoes;
+
+    if (nome) {
+        resultado = resultado.filter(p => p.nome.toLowerCase().includes(nome.toLocaleLowerCase()));
+    }
+
+    if (efeito) {
+        resultado = resultado.filter(p => p.efeito.toLowerCase().includes(efeito.toLocaleLowerCase()));
+    }
+
+    res.status(200).json({
+        total: resultado.length,
+        data: resultado
+    });
+});
+
+//Query parameters - Animais
+app.get('/animais', (req, res) => {
+    const { tipo, nome } = req.query;
+    let resultado = animais;
+
+    if (tipo) {
+        resultado = resultado.filter(a => a.tipo.toLowerCase().includes(tipo.toLocaleLowerCase()));
+    }
+
+    if (nome) {
+        resultado = resultado.filter(a => a.nome.toLowerCase().includes(nome.toLocaleLowerCase()));
+    }
+
+    res.status(200).json({
+        total: resultado.length,
+        data: resultado
     });
 });
 
